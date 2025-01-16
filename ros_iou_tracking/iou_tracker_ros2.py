@@ -122,8 +122,15 @@ class IoUTracker(Node):
             if len(self.image.shape) > 2:
                 # self.bboxes_msg.header = self.image_header
                 # self.bboxes_msg.image_header = self.image_header
-                self.bboxes_msg.detections = copy.deepcopy(self.bboxes)
-                self.bbox_pub.publish(self.bboxes_msg)
+                # self.bboxes_msg.detections = copy.deepcopy(self.bboxes)
+                header = Header()
+                clock = self.get_clock().now().to_msg()
+                header.stamp = clock
+
+                detection_array_msg = Detection2DArray()
+                detection_array_msg.header = header
+                detection_array_msg.detections = copy.deepcopy(self.bboxes)
+                self.bbox_pub.publish(detection_array_msg)
 
 
     def __raw_image_callback(self, data):
