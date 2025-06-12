@@ -187,7 +187,6 @@ class IoUTracker(Node):
         ids = []
         if trackers.shape[0] != 0:
             for tracker in trackers:
-                print(tracker)
                 xmin, ymin, xmax, ymax = int(tracker[0]), int(tracker[1]), int(tracker[2]), int(tracker[3])
                 id = int(tracker[4])
                 center = (int((xmin + xmax) / 2.), int((ymin + ymax) / 2.))
